@@ -26,7 +26,7 @@ export function DashboardHeader() {
             <Button
               variant="outline"
               className="border-border hover:bg-muted text-foreground"
-              onClick={() => navigate("/home")}
+              onClick={() => navigate("/client-selection")}
             >
               Back to Home
             </Button>
