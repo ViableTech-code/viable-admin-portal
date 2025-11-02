@@ -1,0 +1,512 @@
+{
+    "summary": [
+        {
+            "name": "billedRevenue",
+            "months": [
+                {
+                    "titles": "total",
+                    "INR": 5,
+                    "USD": 22,
+                    "percentage": "52%"
+                },
+                {
+                    "titles": "april",
+                    "INR": 5,
+                    "USD": 22,
+                    "percentage": "52%",
+                    "growthPercentage": "0"
+                }
+            ]
+        },
+        {
+            "name": "billedExpenses",
+            "months": [
+                {
+                    "titles": "total",
+                    "INR": 5,
+                    "USD": 22,
+                    "percentage": "52%"
+                },
+                {
+                    "titles": "april",
+                    "INR": 5,
+                    "USD": 22,
+                    "percentage": "52%",
+                    "growthPercentage": "0"
+                }
+            ]
+        }
+    ],
+    "billingView": {
+        "billedRevenue": {
+            "monthlyRevenueChart": [
+                {
+                    "titles": "total",
+                    "INR": 5,
+                    "USD": 22
+                },
+                {
+                    "titles": "april",
+                    "INR": 5,
+                    "USD": 22
+                }
+            ],
+            "clientsByRevenue": [
+                {
+                    "name": "wishNew llc",
+                    "months": [
+                        {
+                            "titles": "total",
+                            "INR": 5,
+                            "USD": 22
+                        },
+                        {
+                            "titles": "april",
+                            "INR": 5,
+                            "USD": 22
+                        }
+                    ]
+                }
+            ],
+            "revenueType": [
+                {
+                    "name": "project",
+                    "months": [
+                        {
+                            "titles": "total",
+                            "INR": 5,
+                            "USD": 22
+                        },
+                        {
+                            "titles": "april",
+                            "INR": 5,
+                            "USD": 22
+                        }
+                    ]
+                },
+                {
+                    "name": "retainer",
+                    "months": [
+                        {
+                            "titles": "total",
+                            "INR": 5,
+                            "USD": 22
+                        },
+                        {
+                            "titles": "april",
+                            "INR": 5,
+                            "USD": 22
+                        }
+                    ]
+                }
+            ],
+            "outStandingBalances": [
+                {
+                    "name": "wishNew llc",
+                    "months": [
+                        {
+                            "titles": "total",
+                            "INR": 5,
+                            "USD": 22
+                        },
+                        {
+                            "titles": "april",
+                            "INR": 5,
+                            "USD": 22
+                        }
+                    ]
+                }
+            ]
+        },
+        "billedExpenses": {
+            "monthlyExpensesChart": [
+                {
+                    "titles": "total",
+                    "INR": 5,
+                    "USD": 22
+                },
+                {
+                    "titles": "april",
+                    "INR": 5,
+                    "USD": 22
+                }
+            ],
+            "expensesCategories": [
+                {
+                    "name": "adminstrator and infrastructure",
+                    "months": [
+                        {
+                            "titles": "total",
+                            "INR": 5,
+                            "USD": 22
+                        },
+                        {
+                            "titles": "april",
+                            "INR": 5,
+                            "USD": 22
+                        }
+                    ]
+                },
+                {
+                    "name": "finance and legal",
+                    "months": [
+                        {
+                            "titles": "total",
+                            "INR": 5,
+                            "USD": 22
+                        },
+                        {
+                            "titles": "april",
+                            "INR": 5,
+                            "USD": 22
+                        }
+                    ]
+                }
+            ]
+        },
+        "billingViewProfit": {
+            "revenueExpensesChart": {
+                "billedRevenue": [
+                    {
+                        "titles": "total",
+                        "INR": 5,
+                        "USD": 22
+                    },
+                    {
+                        "titles": "april",
+                        "INR": 5,
+                        "USD": 22
+                    }
+                ],
+                "billedDirectExpenses": [
+                    {
+                        "titles": "total",
+                        "INR": 5,
+                        "USD": 22
+                    },
+                    {
+                        "titles": "april",
+                        "INR": 5,
+                        "USD": 22
+                    }
+                ],
+                "billedGrossProfit": [
+                    {
+                        "titles": "total",
+                        "INR": 5,
+                        "USD": 22
+                    },
+                    {
+                        "titles": "april",
+                        "INR": 5,
+                        "USD": 22
+                    }
+                ]
+            },
+            "clientWiseProfitability": [
+                {
+                    "name": "wishNew llc",
+                    "revenue": [
+                        {
+                            "titles": "total",
+                            "INR": 5,
+                            "USD": 22
+                        },
+                        {
+                            "titles": "april",
+                            "INR": 5,
+                            "USD": 22
+                        }
+                    ],
+                    "projectExpenses": [
+                        {
+                            "titles": "total",
+                            "INR": 5,
+                            "USD": 22
+                        },
+                        {
+                            "titles": "april",
+                            "INR": 5,
+                            "USD": 22
+                        }
+                    ],
+                    "margin": [
+                        {
+                            "titles": "total",
+                            "INR": 5,
+                            "USD": 22
+                        },
+                        {
+                            "titles": "april",
+                            "INR": 5,
+                            "USD": 22
+                        }
+                    ],
+                    "marginPercentage": [
+                        {
+                            "titles": "total",
+                            "INR": 5,
+                            "USD": 22
+                        },
+                        {
+                            "titles": "april",
+                            "INR": 5,
+                            "USD": 22
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    "bankView": {
+        "bankRevenue": {
+            "monthlyRevenue": [
+                {
+                    "titles": "total",
+                    "INR": 5,
+                    "USD": 22
+                },
+                {
+                    "titles": "april",
+                    "INR": 5,
+                    "USD": 22
+                }
+            ],
+            "topClientByRevenue": [
+                {
+                    "name": "wishNew llc",
+                    "months": [
+                        {
+                            "titles": "total",
+                            "INR": 5,
+                            "USD": 22
+                        },
+                        {
+                            "titles": "april",
+                            "INR": 5,
+                            "USD": 22
+                        }
+                    ]
+                }
+            ],
+            "revenueType": [
+                {
+                    "name": "project",
+                    "months": [
+                        {
+                            "titles": "total",
+                            "INR": 5,
+                            "USD": 22
+                        },
+                        {
+                            "titles": "april",
+                            "INR": 5,
+                            "USD": 22
+                        }
+                    ]
+                },
+                {
+                    "name": "retainer",
+                    "months": [
+                        {
+                            "titles": "total",
+                            "INR": 5,
+                            "USD": 22
+                        },
+                        {
+                            "titles": "april",
+                            "INR": 5,
+                            "USD": 22
+                        }
+                    ]
+                }
+            ]
+        },
+        "bankExpenses": {
+            "monthlyExpensesChart": [
+                {
+                    "titles": "total",
+                    "INR": 5,
+                    "USD": 22
+                },
+                {
+                    "titles": "april",
+                    "INR": 5,
+                    "USD": 22
+                }
+            ],
+            "expensesCategories": [
+                {
+                    "name": "adminstrator and infrastructure",
+                    "months": [
+                        {
+                            "titles": "total",
+                            "INR": 5,
+                            "USD": 22
+                        },
+                        {
+                            "titles": "april",
+                            "INR": 5,
+                            "USD": 22
+                        }
+                    ]
+                },
+                {
+                    "name": "finance and legal",
+                    "months": [
+                        {
+                            "titles": "total",
+                            "INR": 5,
+                            "USD": 22
+                        },
+                        {
+                            "titles": "april",
+                            "INR": 5,
+                            "USD": 22
+                        }
+                    ]
+                }
+            ]
+        },
+        "cashflow": {
+            "revenueExpensesChart": {
+                "bankRevenue": [
+                    {
+                        "titles": "total",
+                        "INR": 5,
+                        "USD": 22
+                    },
+                    {
+                        "titles": "april",
+                        "INR": 5,
+                        "USD": 22
+                    }
+                ],
+                "bankDirectExpenses": [
+                    {
+                        "titles": "total",
+                        "INR": 5,
+                        "USD": 22
+                    },
+                    {
+                        "titles": "april",
+                        "INR": 5,
+                        "USD": 22
+                    }
+                ],
+                "bankGrossProfit": [
+                    {
+                        "titles": "total",
+                        "INR": 5,
+                        "USD": 22
+                    },
+                    {
+                        "titles": "april",
+                        "INR": 5,
+                        "USD": 22
+                    }
+                ]
+            },
+            "clientWiseProfitability": [
+                {
+                    "name": "wishNew llc",
+                    "revenue": [
+                        {
+                            "titles": "total",
+                            "INR": 5,
+                            "USD": 22
+                        },
+                        {
+                            "titles": "april",
+                            "INR": 5,
+                            "USD": 22
+                        }
+                    ],
+                    "projectExpenses": [
+                        {
+                            "titles": "total",
+                            "INR": 5,
+                            "USD": 22
+                        },
+                        {
+                            "titles": "april",
+                            "INR": 5,
+                            "USD": 22
+                        }
+                    ],
+                    "margin": [
+                        {
+                            "titles": "total",
+                            "INR": 5,
+                            "USD": 22
+                        },
+                        {
+                            "titles": "april",
+                            "INR": 5,
+                            "USD": 22
+                        }
+                    ],
+                    "marginPercentage": [
+                        {
+                            "titles": "total",
+                            "INR": 5,
+                            "USD": 22
+                        },
+                        {
+                            "titles": "april",
+                            "INR": 5,
+                            "USD": 22
+                        }
+                    ]
+                }
+            ]
+        },
+        "liquidity": [
+            {
+                "name": "Totals",
+                "months": [
+                    {
+                        "titles": "april",
+                        "INR": 5,
+                        "USD": 22
+                    },
+                    {
+                        "titles": "May",
+                        "INR": 5,
+                        "USD": 22
+                    }
+                ]
+            },
+            {
+                "name": "HDFC Bank",
+                "months": [
+                    {
+                        "titles": "april",
+                        "INR": 5,
+                        "USD": 22
+                    },
+                    {
+                        "titles": "may",
+                        "INR": 5,
+                        "USD": 22
+                    }
+                ]
+            },
+            {
+                "name": "IDFC Bank",
+                "months": [
+                    {
+                        "titles": "april",
+                        "INR": 5,
+                        "USD": 22
+                    },
+                    {
+                        "titles": "may",
+                        "INR": 5,
+                        "USD": 22
+                    }
+                ]
+            }
+        ]
+    }
+}
