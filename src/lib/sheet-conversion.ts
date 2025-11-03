@@ -663,9 +663,47 @@ function parseLiquidity(
 ): Liquidity[] {
   const sheet = byName.get("Bank View_Liquidity") || [];
 
-  const { data: liquidity } = parseNamedMonthlyData(sheet, 0, months);
+  const { data: liquidity } = parseNamedLiquidityData(sheet, 0, months);
 
   return liquidity;
+}
+
+function parseNamedLiquidityData(
+  sheet: string[][],
+  startIndex: number,
+  months: string[],
+  breakCondition?: (row: string[]) => boolean
+): { data: NamedMonthlyData[]; nextIndex: number } {
+  const data: NamedMonthlyData[] = [];
+  let currentIndex = startIndex;
+
+  for (let r = startIndex; r < sheet.length; r++) {
+    const row = sheet[r];
+
+    if (!row || !row.length) {
+      currentIndex++;
+      continue;
+    }
+
+    if (breakCondition && breakCondition(row)) {
+      break;
+    }
+
+    data.push({
+      name: row[0],
+      months: months.map((title, j) => {
+        const offset = j * 2 + 1;
+        return createMonthData(
+          title,
+          row[offset] || "0",
+          row[offset + 1] || "0"
+        );
+      }),
+    });
+    currentIndex++;
+  }
+
+  return { data, nextIndex: currentIndex };
 }
 
 export async function transformGoogleSheet(
