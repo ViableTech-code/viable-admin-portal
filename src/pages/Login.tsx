@@ -1,12 +1,4 @@
 import { useEffect, useState } from "react";
-import { auth, googleProvider } from "../firebase";
-import {
-  signInWithPopup,
-  signInWithEmailAndPassword,
-  createUserWithEmailAndPassword,
-  signOut,
-  GoogleAuthProvider,
-} from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import {
@@ -16,40 +8,63 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 import { PoweredByViable } from "@/components/dashboard/PoweredByViable";
+import { authenticateUser } from "../lib/firebaseService";
+import { Mail, Lock, AlertCircle, Eye, EyeOff } from "lucide-react";
+import viableLogo from "@/assets/viable-logo.png";
 import { getAdminEmails } from "@/lib/firebaseHelper";
 
 const Login = () => {
   const nav = useNavigate();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
-  async function onGoogleSignIn() {
+  async function handleLogin(e: React.FormEvent) {
+    e.preventDefault();
     setError(null);
+
+    // Basic validation
+    if (!email || !password) {
+      setError("Please enter both email and password");
+      return;
+    }
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setError("Please enter a valid email address");
+      return;
+    }
+
+    setLoading(true);
+
     try {
-      // Request the Sheets + Drive readonly scopes to get an OAuth access token on login
-      googleProvider.addScope(
-        "https://www.googleapis.com/auth/spreadsheets.readonly"
-      );
-      googleProvider.addScope("https://www.googleapis.com/auth/drive.readonly");
-      const result = await signInWithPopup(auth, googleProvider);
-      // result contains user, credential, and credential.accessToken
-      const credential = GoogleAuthProvider.credentialFromResult(result);
-      if (!credential) throw new Error("No OAuth credential found");
-      const accessToken = credential.accessToken;
-      sessionStorage.setItem("accessToken", accessToken || "");
-      sessionStorage.setItem("email", result.user.email || "");
-      // You can read credential.accessToken to call Sheets API immediately on the client.
-      const adminEmails = await getAdminEmails();
-      if (adminEmails.includes(result.user.email)) {
-        nav("/client-selection");
+      const result = await authenticateUser(email, password);
+
+      if (result.success && result.user) {
+        // Store user info in sessionStorage
+        sessionStorage.setItem("userId", result.user.id);
+        sessionStorage.setItem("email", result.user.email || "");
+        sessionStorage.setItem("userName", result.user.name || "");
+
+        const adminEmails = await getAdminEmails();
+        if (adminEmails.includes(result.user.email)) {
+          nav("/client-selection");
+        } else {
+          nav("/home");
+        }
       } else {
-        nav("/home");
+        setError(result.error || "Login failed. Please try again.");
       }
-    } catch (err: any) {
-      console.log("🚀 ~ onGoogleSignIn ~ err:", err);
-      setError(err.message);
+    } catch (err: unknown) {
+      console.error("Login error:", err);
+      setError("An unexpected error occurred. Please try again.");
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -60,18 +75,17 @@ const Login = () => {
 
   return (
     <div className="min-h-screen bg-background flex items-center justify-center p-4">
-      {/* Background gradient effect */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-chart-1/5 pointer-events-none" />
 
       <div className="w-full max-w-md relative">
-        {/* Main auth card */}
         <Card className="bg-gradient-card border-border/50 shadow-card backdrop-blur-sm">
           <CardHeader className="text-center space-y-4">
-            {/* Logo/Brand area */}
-            <div className="mx-auto w-16 h-16 bg-gradient-primary rounded-2xl flex items-center justify-center shadow-glow">
-              <div className="w-8 h-8 bg-primary-foreground rounded-lg flex items-center justify-center">
-                <div className="w-4 h-4 bg-primary rounded-sm"></div>
-              </div>
+            <div className="mx-auto w-20 h-20 flex items-center justify-center">
+              <img
+                src={viableLogo}
+                alt="Viable"
+                className="w-full h-full object-contain"
+              />
             </div>
 
             <div className="space-y-2">
@@ -85,71 +99,81 @@ const Login = () => {
           </CardHeader>
 
           <CardContent className="space-y-6">
-            {/* Google Sign In Button */}
-            <Button
-              onClick={onGoogleSignIn}
-              disabled={loading}
-              className="w-full h-12 bg-card hover:bg-card/80 border border-border/50 text-foreground font-medium transition-all duration-300 hover:shadow-primary/20 hover:shadow-lg group"
-              variant="outline"
-            >
-              <div className="flex items-center space-x-3">
-                <svg className="w-5 h-5" viewBox="0 0 24 24">
-                  <path
-                    fill="#4285F4"
-                    d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
-                  />
-                  <path
-                    fill="#34A853"
-                    d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
-                  />
-                  <path
-                    fill="#FBBC05"
-                    d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
-                  />
-                  <path
-                    fill="#EA4335"
-                    d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
-                  />
-                </svg>
-                <span>Continue with Google</span>
-              </div>
-            </Button>
+            <form onSubmit={handleLogin} className="space-y-4">
+              {error && (
+                <Alert variant="destructive">
+                  <AlertCircle className="h-4 w-4" />
+                  <AlertDescription>{error}</AlertDescription>
+                </Alert>
+              )}
 
-            {/* <div className="relative">
-              <div className="absolute inset-0 flex items-center">
-                <Separator className="w-full" />
+              <div className="space-y-2">
+                <Label htmlFor="email" className="text-foreground">
+                  Email
+                </Label>
+                <div className="relative">
+                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                  <Input
+                    id="email"
+                    type="email"
+                    placeholder="Enter your email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="pl-10 h-12 bg-background border-border/50 focus:border-primary transition-colors"
+                    disabled={loading}
+                    autoComplete="email"
+                  />
+                </div>
               </div>
-              <div className="relative flex justify-center text-xs uppercase">
-                <span className="bg-card px-2 text-muted-foreground">Or</span>
-              </div>
-            </div> */}
 
-            {/* Alternative auth options */}
-            {/* <div className="space-y-3">
+              <div className="space-y-2">
+                <Label htmlFor="password" className="text-foreground">
+                  Password
+                </Label>
+                <div className="relative">
+                  <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                  <Input
+                    id="password"
+                    type={showPassword ? "text" : "password"}
+                    placeholder="Enter your password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="pl-10 pr-10 h-12 bg-background border-border/50 focus:border-primary transition-colors"
+                    disabled={loading}
+                    autoComplete="current-password"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                    disabled={loading}
+                  >
+                    {showPassword ? (
+                      <EyeOff className="h-4 w-4" />
+                    ) : (
+                      <Eye className="h-4 w-4" />
+                    )}
+                  </button>
+                </div>
+              </div>
+
               <Button
-                variant="ghost"
-                className="w-full h-12 text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
-                onClick={() => console.log("Email login clicked")}
+                type="submit"
+                disabled={loading}
+                className="w-full h-12 bg-gradient-primary hover:opacity-90 text-primary-foreground font-medium transition-all duration-300 shadow-glow"
               >
-                Sign in with Email
+                {loading ? (
+                  <div className="flex items-center space-x-2">
+                    <div className="w-4 h-4 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin" />
+                    <span>Signing in...</span>
+                  </div>
+                ) : (
+                  "Sign In"
+                )}
               </Button>
-            </div> */}
-
-            {/* Terms and Privacy */}
-            <div className="text-center text-xs text-muted-foreground">
-              By continuing, you agree to our{" "}
-              <button className="underline hover:text-primary transition-colors">
-                Terms of Service
-              </button>{" "}
-              and{" "}
-              <button className="underline hover:text-primary transition-colors">
-                Privacy Policy
-              </button>
-            </div>
+            </form>
           </CardContent>
         </Card>
-
-        {/* Footer */}
         <div className="mt-8 text-center">
           <PoweredByViable />
         </div>

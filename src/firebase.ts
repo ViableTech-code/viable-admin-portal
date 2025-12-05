@@ -4,15 +4,13 @@ import { getAuth, GoogleAuthProvider } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAFjWdl2g19gEfD86L_dGo2Bg3hMFr_91E",
-  authDomain: "trieverse-infotech.firebaseapp.com",
-  projectId: "trieverse-infotech",
-  storageBucket: "trieverse-infotech.firebasestorage.app",
-  messagingSenderId: "454845958179",
-  appId: "1:454845958179:web:4b9c7ade3764ce5eae8996",
-  measurementId: "G-89FSTDL6X5",
+  apiKey: "AIzaSyBjyIgNz3mcbbt9Y-RyEfvOBCINWE2aDu0",
+  authDomain: "winter-legend-461709-t1.firebaseapp.com",
+  projectId: "winter-legend-461709-t1",
+  storageBucket: "winter-legend-461709-t1.firebasestorage.app",
+  messagingSenderId: "864391407297",
+  appId: "1:864391407297:web:a15defddeddaa3bdd55640"
 };
-
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore(app);

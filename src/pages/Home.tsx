@@ -17,16 +17,16 @@ export default function Home() {
   const [hasAccess, setHasAccess] = useState<boolean | null>(null);
 
   useEffect(() => {
-    const token = sessionStorage.getItem("accessToken");
-    if (!token) return;
-    checkSheetAccess();
+    const email = sessionStorage.getItem("email");
+    if (!email) return;
+    checkSheetAccess(email);
   }, []);
 
-  const checkSheetAccess = async () => {
+  const checkSheetAccess = async (email: string) => {
     setCheckingAccess(true);
     try {
       const snap = await getDocs(collection(db, "sheets"));
-      const currentUserEmail = auth.currentUser?.email?.toLowerCase();
+      const currentUserEmail = email?.toLowerCase();
       const docs = snap.docs
         .filter((d) =>
           (d.data().sharedWith || [])

@@ -13,16 +13,18 @@ export async function getGoogleSheetData(
   }
   const spreadsheetId = sheetId;
   if (!spreadsheetId) throw new Error("No spreadsheet ID found in session");
-  const accessToken = sessionStorage.getItem("accessToken");
-  if (!accessToken) throw new Error("No access token found in session");
+  // const accessToken = sessionStorage.getItem("accessToken");
+  // if (!accessToken) throw new Error("No access token found in session");
+  const sheetApiKey = import.meta.env.VITE_SHEET_API_KEY;
+
+  if (!sheetApiKey) throw new Error("No api key found");
   const baseUrl = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}`;
 
   // 1. Get metadata about the spreadsheet (to list sheets)
-  const metaRes = await fetch(`${baseUrl}?fields=sheets.properties`, {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-  });
+  const metaRes = await fetch(
+    `${baseUrl}?fields=sheets.properties&key=${sheetApiKey}`,
+    {}
+  );
 
   if (!metaRes.ok) {
     throw new Error(
@@ -39,12 +41,8 @@ export async function getGoogleSheetData(
   const data: SheetData[] = await Promise.all(
     sheets.map(async (sheetName) => {
       const res = await fetch(
-        `${baseUrl}/values/${encodeURIComponent(sheetName)}`,
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
+        `${baseUrl}/values/${encodeURIComponent(sheetName)}?key=${sheetApiKey}`,
+        {}
       );
 
       if (!res.ok) {
