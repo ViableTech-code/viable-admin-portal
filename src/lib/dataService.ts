@@ -8,6 +8,7 @@ export interface SummaryMetric {
   currency: Currency;
   isHighlighted?: boolean;
   sorting?: number;
+  growthPercentage?: number;
 }
 
 export interface MonthOption {
@@ -204,6 +205,9 @@ export class DataService {
       change: this.stringPercentageToNumber(billedProfitData?.percentage),
       currency: this.currentCurrency,
       sorting: 3,
+      growthPercentage: this.stringPercentageToNumber(
+        billedProfitData?.growthPercentage || "0"
+      ),
     });
 
     // Billed Cashflow
@@ -272,6 +276,9 @@ export class DataService {
       change: this.stringPercentageToNumber(bankProfitData?.percentage),
       currency: this.currentCurrency,
       sorting: 7,
+      growthPercentage: this.stringPercentageToNumber(
+        bankProfitData?.growthPercentage || "0"
+      ),
     });
 
     // Billed Cashflow

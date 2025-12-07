@@ -57,18 +57,21 @@ export default function DashboardWithData() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           <MetricCard
             title={dashboardData?.billedRevenue?.title || "Billed Revenue"}
+            label={dashboardData?.billedRevenue?.label || "Revenue"}
             value={dashboardData?.billedRevenue?.value || "$$$"}
             change={dashboardData?.billedRevenue?.change || 12.5}
             isHighlighted={true}
           />
           <MetricCard
             title={dashboardData?.billedExpenses?.title || "Billed Expenses"}
+            label={dashboardData?.billedExpenses?.label || "Expenses"}
             value={dashboardData?.billedExpenses?.value || "$$$"}
             change={dashboardData?.billedExpenses?.change || -3.2}
             onClick={() => navigate("/billed-expenses")}
           />
           <MetricCard
             title={dashboardData?.profit?.title || "Profit"}
+            label={dashboardData?.profit?.label || "Profit"}
             value={dashboardData?.profit?.value || "$$$"}
             change={dashboardData?.profit?.change || 8.7}
             onClick={() => navigate("/billed-profit")}

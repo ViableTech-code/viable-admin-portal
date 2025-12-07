@@ -5,7 +5,7 @@ export interface SheetData {
 }
 
 export async function getGoogleSheetData(
-  sheetId: string
+  sheetId?: string
 ): Promise<SheetData[]> {
   const sData = await localStorage.getItem("sheetData");
   if (sData) {

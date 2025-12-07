@@ -75,7 +75,9 @@ export default function Summary() {
             {summaryMetrics.slice(0, 4).map((metric) => (
               <MetricCard
                 key={metric.title}
-                title={metric.label}
+                label={metric.label}
+                title={metric.title}
+                growthPercentage={metric.growthPercentage || 0}
                 value={dataService.formatCurrency(metric.value)}
                 change={metric.change}
                 // isHighlighted={metric.isHighlighted}
@@ -99,7 +101,9 @@ export default function Summary() {
             {summaryMetrics.slice(4, 8).map((metric) => (
               <MetricCard
                 key={metric.title}
-                title={metric.label}
+                label={metric.label}
+                title={metric.title}
+                growthPercentage={metric.growthPercentage || 0}
                 value={dataService.formatCurrency(metric.value)}
                 change={metric.change}
                 onClick={() => {
@@ -122,6 +126,7 @@ export default function Summary() {
             {summaryMetrics.slice(8, 9).map((metric) => (
               <MetricCard
                 key={metric.title}
+                label={metric.label}
                 title={metric.title}
                 value={dataService.formatCurrency(metric.value)}
                 change={metric.change}

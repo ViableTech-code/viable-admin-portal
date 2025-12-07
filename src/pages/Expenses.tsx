@@ -48,6 +48,7 @@ export default function Expenses() {
               return (
                 <MetricCard
                   title="Revenue"
+                  label="Revenue"
                   value="$$$"
                   change={0}
                   onClick={() => navigate("/billed-revenue")}
@@ -56,7 +57,9 @@ export default function Expenses() {
             }
             return (
               <MetricCard
-                title={m.label}
+                title={m.title}
+                label={m.label}
+                growthPercentage={m.growthPercentage}
                 value={dataService.formatCurrency(m.value)}
                 change={m.change}
                 onClick={() => navigate("/billed-revenue")}
@@ -70,6 +73,7 @@ export default function Expenses() {
               return (
                 <MetricCard
                   title="Expenses"
+                  label="Expenses"
                   value="$$$"
                   change={0}
                   isHighlighted={true}
@@ -78,7 +82,9 @@ export default function Expenses() {
             }
             return (
               <MetricCard
-                title={m.label}
+                title={m.title}
+                label={m.label}
+                growthPercentage={m.growthPercentage}
                 value={dataService.formatCurrency(m.value)}
                 change={m.change}
                 isHighlighted={true}
@@ -92,6 +98,7 @@ export default function Expenses() {
               return (
                 <MetricCard
                   title="Profit"
+                  label="Profit"
                   value="$$$"
                   change={0}
                   onClick={() => navigate("/billed-profit")}
@@ -100,7 +107,9 @@ export default function Expenses() {
             }
             return (
               <MetricCard
-                title={m.label}
+                title={m.title}
+                label={m.label}
+                growthPercentage={m.growthPercentage}
                 value={dataService.formatCurrency(m.value)}
                 change={m.change}
                 onClick={() => navigate("/billed-profit")}

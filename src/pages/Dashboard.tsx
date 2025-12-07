@@ -52,7 +52,9 @@ export default function Dashboard() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           {summaryMetrics.length > 0 && (
             <MetricCard
-              title={summaryMetrics[0].label}
+              title={summaryMetrics[0].title}
+              label={summaryMetrics[0].label}
+              growthPercentage={summaryMetrics[0].growthPercentage}
               value={dataService.formatCurrency(summaryMetrics[0].value)}
               change={summaryMetrics[0].change}
               isHighlighted={true}
@@ -60,7 +62,9 @@ export default function Dashboard() {
           )}
           {summaryMetrics.length > 1 && (
             <MetricCard
-              title={summaryMetrics[1].label}
+              title={summaryMetrics[1].title}
+              label={summaryMetrics[1].label}
+              growthPercentage={summaryMetrics[1].growthPercentage}
               value={dataService.formatCurrency(summaryMetrics[1].value)}
               change={summaryMetrics[1].change}
               onClick={() => navigate("/billed-expenses")}
@@ -68,7 +72,9 @@ export default function Dashboard() {
           )}
           {summaryMetrics.length > 2 && (
             <MetricCard
-              title={summaryMetrics[2].label}
+              title={summaryMetrics[2].title}
+              label={summaryMetrics[2].label}
+              growthPercentage={summaryMetrics[2].growthPercentage}
               value={dataService.formatCurrency(summaryMetrics[2].value)}
               change={summaryMetrics[2].change}
               onClick={() => navigate("/billed-profit")}

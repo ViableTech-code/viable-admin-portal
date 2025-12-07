@@ -133,13 +133,15 @@ export function createMonthData(
   titles: string,
   INR: string,
   USD: string,
-  percentage?: string
+  percentage?: string,
+  growthPercentage?: string
 ): MonthData {
   return {
     titles,
     INR: parseCurrencyValue(INR),
     USD: parseCurrencyValue(USD),
     percentage,
+    growthPercentage,
   };
 }
 
@@ -153,6 +155,7 @@ const summaryRowNames = [
   "Bank Cashflow",
   "Bank Profit",
   "Liquidity",
+  "",
 ];
 
 const getRowByName = (sheet: string[][], name: string): string[] | undefined =>
@@ -171,7 +174,8 @@ function createSheetMap(rawSheets: SheetData[]): Map<string, string[][]> {
 function buildMonthData(
   row: string[] | undefined,
   months: string[],
-  rowPercentage?: string[]
+  rowPercentage?: string[],
+  growthPercentage?: string[]
 ): MonthData[] {
   if (!row) return [];
 
@@ -181,7 +185,10 @@ function buildMonthData(
       title,
       row[offset] || "0",
       row[offset + 1] || "0",
-      rowPercentage ? rowPercentage[i + 1] : undefined
+      rowPercentage ? rowPercentage[i + 1] : undefined,
+      growthPercentage && growthPercentage.length
+        ? growthPercentage[offset]
+        : undefined
     );
   });
 }
@@ -259,10 +266,23 @@ function parseSummaryData(
     }
 
     const rowPercentage = getPercentageSummaryRowByName(name);
+    let growthRawPercentage = [];
+
+    if (name == "Billed Profit") {
+      growthRawPercentage = [...getValueSummaryRowByName("Billed Profit %")];
+    }
+    if (name == "Bank Profit") {
+      growthRawPercentage = [...getValueSummaryRowByName("Bank Profit %")];
+    }
     return {
       name: name.replace(" ", "").toLowerCase(),
       key: name,
-      months: buildMonthData(rowValue, months, rowPercentage),
+      months: buildMonthData(
+        rowValue,
+        months,
+        rowPercentage,
+        growthRawPercentage
+      ),
     };
   });
 }

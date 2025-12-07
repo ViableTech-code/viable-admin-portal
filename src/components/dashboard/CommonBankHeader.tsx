@@ -9,16 +9,18 @@ const CommanBankHeader = ({ summaryMetrics, dataService, navigate }) => {
     const label = m ? m.label : title;
     const value = m ? dataService.formatCurrency(m.value) : "$$$";
     const change = m ? m.change : 0;
-
+    const growthPercentage = m?.growthPercentage || 0;
     // highlight if route matches
     const isActive = location.pathname === route;
 
     return (
       <MetricCard
         key={key}
-        title={label}
+        title={key}
+        label={label}
         value={value}
         change={change}
+        growthPercentage={growthPercentage}
         isHighlighted={isActive}
         onClick={() => navigate(route)}
       />
